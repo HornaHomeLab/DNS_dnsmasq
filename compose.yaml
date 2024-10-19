@@ -1,0 +1,15 @@
+services:
+  DNS_dnsmasq:
+    container_name: DNS_dnsmasq
+    image: strm/dnsmasq
+    restart: unless-stopped
+    volumes:
+      - ./config/dnsmasq.conf:/etc/dnsmasq.conf
+      - ./config/resolv.conf:/etc/resolv.conf
+      - ./config/hosts.conf:/etc/hosts.conf
+      - ./config/hosts2.conf:/etc/hosts2.conf
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    cap_add:
+      - NET_ADMIN
